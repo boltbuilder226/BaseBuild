@@ -1,0 +1,8 @@
+name: BaseBuild
+main: com.Main
+version: 1.0.0
+depend: [Essentials]
+
+commands:
+    cmd:
+      description: Command
