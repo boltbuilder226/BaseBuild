@@ -22,6 +22,9 @@ public class Main extends JavaPlugin {
 	public static File configf;
 	public static FileConfiguration config;
 	
+	public static File pricesf;
+	public static FileConfiguration prices;
+	
 	public void onEnable(){
 		
 		instance = this;
@@ -44,15 +47,21 @@ public class Main extends JavaPlugin {
 
 		// Initialization
 		configf = new File(getDataFolder(), "config.yml");
+		pricesf = new File(getDataFolder(), "prices.yml");
 
 		if (!configf.exists()) {
 			configf.getParentFile().mkdirs();
 			copy(getResource("config.yml"), configf);
 		}
+		if (!pricesf.exists()) {
+			pricesf.getParentFile().mkdirs();
+			copy(getResource("prices.yml"), pricesf);
+		}
 		
 //		Loading
 		try {
 			config.load(configf);
+			prices.load(pricesf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,0 +1,16 @@
+# Prices for bases
+
+small:
+  one: 1000
+  two: 1000
+  three: 1000
+  
+medium:
+  one: 5000
+  two: 5000
+  three: 5000
+  
+large:
+  one: 10000
+  two: 10000
+  three: 10000
