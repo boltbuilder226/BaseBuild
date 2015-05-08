@@ -1,8 +1,8 @@
 name: BaseBuild
 main: com.Main
 version: 1.0.0
-depend: [Essentials, WorldEdit]
+depend: [WorldEdit]
 
 commands:
-    cmd:
-      description: Command
+    base:
+      description: Open base menu

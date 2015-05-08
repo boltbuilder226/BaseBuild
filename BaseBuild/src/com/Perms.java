@@ -2,7 +2,8 @@ package com;
 
 public enum Perms {
 	
-	Default("default", "Command description");
+	Build("build", "Permission to build a base"),
+	BuildAnywhere("build.anywhere", "Permission to build a base anywhere");
 	
 	
 	private String perm;

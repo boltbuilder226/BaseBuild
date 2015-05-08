@@ -11,9 +11,9 @@ public class BaseBuildEvent extends Event {
 	
 	private Player player;
 	private Location loc;
-	private int price;
+	private double price;
 	
-	public BaseBuildEvent(Player player, Location loc, int price) {
+	public BaseBuildEvent(Player player, Location loc, double price) {
 		this.player = player;
 		this.loc = loc;
 		this.price = price;
@@ -36,7 +36,7 @@ public class BaseBuildEvent extends Event {
 		return loc;
 	}
 	
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	

@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="C:/Users/Gram/Documents/Programming/Minecraft/lib/spigot.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Gram/Documents/Programming/Minecraft/lib/Essentials-2.x-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Gram/Documents/Programming/Minecraft/lib/worldedit-bukkit-6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gram/Documents/Programming/Minecraft/lib/Vault.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,11 +6,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import net.md_5.bungee.api.ChatColor;
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.commands.Base;
 import com.listeners.PlayerListener;
 
 public class Main extends JavaPlugin {
@@ -25,12 +30,21 @@ public class Main extends JavaPlugin {
 	public static File pricesf;
 	public static FileConfiguration prices;
 	
+	public static Economy econ = null;
+    public static Permission perms = null;
+    public static Chat chat = null;
+    
+    public static boolean hasEss, hasVault;
+	
 	public void onEnable(){
 		
 		instance = this;
 		createFiles();
 		
 		getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+		getCommand("base").setExecutor(new Base());
+		hasEss = hasEss();
+		hasVault = hasVault();
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + m1);
 		
@@ -91,5 +105,44 @@ public class Main extends JavaPlugin {
 		}
 
 	}
+	
+	public boolean hasEss() {
+		
+		return getServer().getPluginManager().getPlugin("Essentials") != null;
+		
+	}
+	
+	public boolean hasVault() {
+		if (setupEconomy()) {
+			setupChat();
+			setupPermissions();
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    private boolean setupChat() {
+        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        chat = rsp.getProvider();
+        return chat != null;
+    }
+
+    private boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+        perms = rsp.getProvider();
+        return perms != null;
+    }
 	
 }
