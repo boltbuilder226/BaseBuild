@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 
 import com.Main;
 import com.Perms;
-import com.utils.GUIManager;
 
 public class Base implements CommandExecutor {
 
@@ -26,8 +25,7 @@ public class Base implements CommandExecutor {
 				player.sendMessage(ChatColor.RED + "You can only use this command in-game!");
 				return false;
 			}
-			GUIManager gui = new GUIManager(Main.instance);
-			gui.openGUI(player);
+			Main.gui.openGUI(player);
 			
 		}
 		
