@@ -2,6 +2,7 @@ name: BaseBuild
 main: com.Main
 version: 1.0.0
 depend: [WorldEdit]
+softdepend: [Essentials, Vault]
 
 commands:
     base:
