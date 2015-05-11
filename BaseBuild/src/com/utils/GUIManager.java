@@ -1,8 +1,10 @@
 package com.utils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,6 +16,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.Main;
+import com.sk89q.worldedit.CuboidClipboard;
+@SuppressWarnings("unused")
 public class GUIManager implements Listener {
 
 	private HashMap<UUID, Boolean> hasGUIopen = new HashMap<UUID, Boolean>();
@@ -162,10 +167,17 @@ public class GUIManager implements Listener {
 					} else if (clicked.equals(back)) {
 						p.openInventory(maininv);
 					}
+					if (!clicked.equals(back)) {
+						closeGUI(p);
+					}
 				} else if (i.equals(bt2)) {
 					if (clicked.equals(BaseT2_1)) {
 						// Base Tier 2 - 1 Base
 						p.sendMessage("You selected [2] Base 1");
+						File file = Main.schematics.get(((4 * 1) + 1) - 1);
+						Bukkit.broadcastMessage("" + (file.getTotalSpace()));
+						CuboidClipboard test = SchematicParser.load(file);
+						SchematicParser.paste(test, p.getLocation());
 					}
 					if (clicked.equals(BaseT2_2)) {
 						// Base Tier 2 - 2 Base
@@ -180,6 +192,9 @@ public class GUIManager implements Listener {
 						p.sendMessage("You selected [2] Base 4");
 					} else if (clicked.equals(back)) {
 						p.openInventory(maininv);
+					}
+					if (!clicked.equals(back)) {
+						closeGUI(p);
 					}
 				} else if (i.equals(bt3)) {
 					if (clicked.equals(BaseT3_1)) {
@@ -199,6 +214,9 @@ public class GUIManager implements Listener {
 						p.sendMessage("You selected [3] Base 4");
 					} else if (clicked.equals(back)) {
 						p.openInventory(maininv);
+					}
+					if (!clicked.equals(back)) {
+						closeGUI(p);
 					}
 				}
 				e.setCancelled(true);

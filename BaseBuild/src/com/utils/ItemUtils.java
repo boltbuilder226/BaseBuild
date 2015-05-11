@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-
+@SuppressWarnings("unused")
 public class ItemUtils {
 	
 	private static HashMap<String, List<List<String>>> anLoreLores = new HashMap<String, List<List<String>>>();

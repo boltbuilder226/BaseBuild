@@ -2,13 +2,17 @@ package com;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
+import org.apache.commons.io.IOUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,6 +44,8 @@ public class Main extends JavaPlugin {
 
 	public static boolean hasEss, hasVault;
 
+	public static ArrayList<File> schematics;
+	
 	public void onEnable() {
 
 		instance = this;
@@ -80,7 +86,7 @@ public class Main extends JavaPlugin {
 
 		config = new YamlConfiguration();
 		prices = new YamlConfiguration();
-		
+
 		// Loading
 		try {
 			config.load(configf);
@@ -89,6 +95,50 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 
+		// Schematic copy
+		File dir = new File(getDataFolder(), "\\schematics");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+
+		File[] tiers = new File[3];
+		
+		for (int i = 0; i < 3; i++) {
+			tiers[i] = new File(dir, "\\"
+					+ config.getString("bases." + (i + 1) + ".title"));
+			if (!tiers[i].exists()) {
+				tiers[i].mkdirs();
+			}
+		}
+
+		File[] files = new File[12];
+		for (int i = 0; i < 12; i++) {
+
+			String name = config.getString("bases." + ((i / 4) + 1) + "."
+					+ ((i % 4) + 1));
+			String filename = name + ".schematic";
+
+			files[i] = new File(tiers[i / 4], filename);
+			try {
+				if (!files[i].exists()) {
+
+					files[i].createNewFile();
+					InputStream is = getResource("schematics/Tier" + ((i / 4) + 1) + "/Base " + ((i % 4) + 1) + ".schematic");
+					OutputStream os = new FileOutputStream(files[i]);
+					if (is == null) {
+						continue;
+					}
+					IOUtils.copy(is, os);
+					
+				}
+			} catch (IOException e) {
+				System.out.println(i);
+			}
+
+		}
+
+		schematics = new ArrayList<File>(Arrays.asList(files));
+		
 	}
 
 	public void copy(InputStream in, File file) {

@@ -1,0 +1,24 @@
+# BaseBuild config
+
+# Names of bases. Do not change if you want to save defaults
+# Name of respective schematic must be the same as name listed below
+
+bases:
+  1:
+    title: Tier1
+    1: Base 1
+    2: Base 2
+    3: Base 3
+    4: Base 4
+  2:
+    title: Tier2
+    1: Base 1
+    2: Base 2
+    3: Base 3
+    4: Base 4
+  3:
+    title: Tier3
+    1: Base 1
+    2: Base 2
+    3: Base 3
+    4: Base 4
